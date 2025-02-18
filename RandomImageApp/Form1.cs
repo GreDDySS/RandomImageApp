@@ -41,5 +41,35 @@ namespace RandomImageApp
                 MessageBox.Show("Ошибка при загрузке изображения: " + ex.Message);
             }
         }
+
+        private void btnDownloadImage_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "JPEG Image|*.jpg|PNG Image|*.png|All Files|*.*",
+                    Title = "Сохранить изображение"
+                };
+                saveFileDialog.ShowDialog();
+
+                if (saveFileDialog.FileName != "")
+                {
+                    try
+                    {
+                        pictureBox1.Image.Save(saveFileDialog.FileName);
+                        MessageBox.Show("Изображение успешно сохранено!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка при сохранении изображения: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Нет изображения для сохранения.");
+            }
+        }
     }
 }
